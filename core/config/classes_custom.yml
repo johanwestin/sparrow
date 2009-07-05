@@ -1,0 +1,5 @@
+core_custom:
+  Config:
+    name: CustomConfig
+    files:
+      - classes/CustomConfig.php

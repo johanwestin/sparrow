@@ -1,0 +1,10 @@
+core:
+  Config:
+    name: Config
+    files:
+      - classes/Config.php
+      - classes/base/BaseConfig.php
+  Model:
+    name: Model
+    files:
+      - classes/base/BaseModel.php
