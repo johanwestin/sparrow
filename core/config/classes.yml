@@ -2,8 +2,8 @@ core:
   Config:
     name: Config
     files:
-      - classes/Config.php
       - classes/base/BaseConfig.php
+      - classes/Config.php
   Model:
     name: Model
     files:
