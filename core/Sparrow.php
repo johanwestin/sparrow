@@ -14,7 +14,7 @@ class Sparrow
   private $filterChains;
   private static $_instance;
   
-  function __construct()
+  private function __construct()
   {
     // init registery
     $this->loadConfig();
