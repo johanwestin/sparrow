@@ -1,0 +1,8 @@
+# <?php die(); ?>
+# Draft.
+
+# Yaml file for the filterchain order and loader
+
+FilterChain:
+  - ACLFilter
+  - ValidationFilter

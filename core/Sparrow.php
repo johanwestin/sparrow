@@ -11,19 +11,36 @@ require_once('yaml/lib/sfYamlParser.php');
 
 class Sparrow
 {
-  private $registery;
+  private $filterChains;
+  private static $_instance;
+  
   function __construct()
   {
     // init registery
     $this->loadConfig();
+
   }
+
   public function init()
   {
+    $this->filterChains = $this->load('FilterChain');
     // Still empty
+  }
+
+  public static function getInstance()
+  {
+    if(self::$_instance == null)
+    {
+      self::$_instance = new Sparrow();
+    }
+    
+
+    return self::$_instance;
   }
 
   private function loadConfig()
   {
+    global $registery;
     $yaml = new sfYamlParser();
     
     $config_files = array_diff( scandir(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'config') , Array( ".", ".." ) );
@@ -53,6 +70,7 @@ class Sparrow
     }
 
     $this->registery = new Zend_Registry($config);
+    $registery = $this->registery; 
   }
 
   public function load($class, $ns = null, $instance_method = null, $params = null)
@@ -62,6 +80,7 @@ class Sparrow
 
     $ns_custom_name = $ns . '_custom';
     $custom_files_to_load = array();
+    $files_to_load = array();
     
     if($this->registery->$ns_custom_name)
     {
@@ -76,13 +95,19 @@ class Sparrow
     $namespace = $this->registery->$ns;
     $files_to_load = $namespace[$class]['files'];
 
-    $files_to_load = array_merge($files_to_load, $custom_files_to_load);
+    if(is_array($files_to_load) && is_array($custom_files_to_load))
+    {
+      $files_to_load = array_merge($files_to_load, $custom_files_to_load);
+    }
 
     return $this->loadClass($files_to_load, $class_name, $instance_method = null, $params = null);
   }
 
   private function loadClass($files_to_load, $class_name, $instance_method = null, $params = null)
   {
+    if(count($files_to_load) == 0)
+      return false;
+      
     foreach($files_to_load as $file) {
       require_once $file;
     }

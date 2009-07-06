@@ -1,10 +1,33 @@
+# <?php die(); ?>
 core:
-  Config:
-    name: Config
+  FilterChain:
+    name: FilterChain
     files:
-      - classes/base/BaseConfig.php
-      - classes/Config.php
-  Model:
-    name: Model
+      - classes/FilterChain.php
+      - classes/base/BaseFilter.php
+  URLHander:
+    name: URLHandler
     files:
-      - classes/base/BaseModel.php
+      - classes/URLHandler.php
+
+  ACLFilter:
+    name: ACLFilter
+    files:
+      - filters/ACLFilter.php
+  ValidationFilter:
+    name: ValidationFilter
+    files:
+      - filters/ValidationFilter.php
+  URLHandlerFilter:
+    name: URLHandlerFilter
+    files:
+      - filters/URLHandlerFilter.php
+  ActionLoaderFilter:
+    name: ACLFilter
+    files:
+      - filters/ActionLoaderFilter.php
+  RenderFilter:
+    name: ACLFilter
+    files:
+      - filters/RenderFilter.php
+    

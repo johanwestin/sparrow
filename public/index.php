@@ -7,11 +7,9 @@
  * @author Carl-Johan Westin
  * @license GPL
  */
-global $registery, $sparrow;
+require_once('../core/Sparrow.php');
 
-require_once('core/Sparrow.php');
-$sparrow = Sparrow::getInstance();
-$sparrow->init();
+$sparrow = new Sparrow();
 
 
 
